@@ -27,10 +27,7 @@ spec:
       volumeMounts:
         - name: shared-data
           mountPath: /init
-      command:
-        - "/bin/sh"
-        - "-c"
-        - "echo 'Hello, World!' > /init/index.html"
+      command: ["sh", "-c", "wget -O /init/index.html https://raw.githubusercontent.com/rayneadm/tings/main/web/index.html"]
   volumes:
     - name: config-volume
       configMap:
