@@ -32,6 +32,13 @@ spec:
           mountPath: /homework
         - name: config-volume
           mountPath: /etc/nginx
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /homework/index.html
+          initialDelaySeconds: 5
+          periodSeconds: 3
       volumes:
       - name: config-volume
         configMap:
