@@ -11,6 +11,13 @@ spec:
     - host: homework.otus
       http:
         paths:
+          - path: /homepage
+            pathType: Prefix
+            backend:
+              service:
+                name: web-apps-svc
+                port:
+                  number: 80
           - path: /
             pathType: Prefix
             backend:
