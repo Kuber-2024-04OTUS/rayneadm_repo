@@ -18,7 +18,14 @@ spec:
       initContainers:
       - name: init-container
         image: busybox
-        command: ["sh", "-c", "wget -O /init/index.html https://raw.githubusercontent.com/rayneadm/tings/main/web/index.html"]
+        command: ["sh", "-c"] 
+        args:
+        - | 
+          wget -O /init/index.html https://raw.githubusercontent.com/rayneadm/tings/main/web/index.html
+          echo "<!-- Appended by init container -->" >> /init/index.html
+          echo "Hostname: $(hostname)" >> /init/index.html
+          echo "Date: $(date)" >> /init/index.html
+          echo "Hostname: $(hostname)" >> /init/index.html
         volumeMounts:
         - name: shared-data
           mountPath: /init
