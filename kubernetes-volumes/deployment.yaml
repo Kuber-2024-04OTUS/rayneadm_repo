@@ -41,6 +41,8 @@ spec:
           mountPath: /homework
         - name: config-volume
           mountPath: /etc/nginx
+        - name: custom-index-html
+          mountPath: /homework/conf
         readinessProbe:
           httpGet:
             path: /index.html
@@ -52,7 +54,11 @@ spec:
         configMap:
           name: nginx-config
       - name: shared-data
-        emptyDir: {}
+        persistentVolumeClaim:
+          claimName: pvc200mi
+      - name: custom-index-html
+        configMap:    
+          name: custom-index-html
   strategy:
     type: RollingUpdate
     rollingUpdate:

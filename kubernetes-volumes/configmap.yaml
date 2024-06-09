@@ -12,10 +12,10 @@ data:
     http {
         server {
             listen 8000;
-            server_name localhost;
+            server_name  localhost;
             location / {
                 root /homework; 
                 index index.html;
             }
+            }
         }
-    }

@@ -4,26 +4,26 @@ data:
   ACE2: DIAMONDS
   ACE3: CROSSES
   ACE4: HEARTS
-index.html: |-
-  <html>
-  <head>
-  <title>ConfigMap example</title>
-  </head>
-  <body>
-  <h1>ConfigMap example</h1>
-  <pre>
-          _____
-         |A .  |  _____
-         | /.\ | |A ^  |  _____
-         |(_._)| | / \ | |A _  |  _____
-         |  |  | | \ / | | ( ) | |A_ _ |
-         |____V| |  .  | |(_'_)| |( v )|
-                 |____V| |  |  | | \ / |
-                         |____V| |  .  |
-                                 |____V|
-  </pre>
-  </body>
-  </html>
+  index.html: |-
+    <html>
+    <head>
+    <title>ConfigMap example</title>
+    </head>
+    <body>
+    <h1>ConfigMap example</h1>
+    <pre>
+            _____
+           |A .  |  _____
+           | /.\ | |A ^  |  _____
+           |(_._)| | / \ | |A _  |  _____
+           |  |  | | \ / | | ( ) | |A_ _ |
+           |____V| |  .  | |(_'_)| |( v )|
+                   |____V| |  |  | | \ / |
+                           |____V| |  .  |
+                                   |____V|
+    </pre>
+    </body>
+    </html>
 kind: ConfigMap
 metadata:
-  name: index-html
+  name: custom-index-html

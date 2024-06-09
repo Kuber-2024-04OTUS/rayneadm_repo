@@ -3,21 +3,12 @@ kind: Ingress
 metadata:
   name: nginx-ingress
   namespace: homework
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   ingressClassName: nginx
   rules:
     - host: homework.otus
       http:
         paths:
-          - path: /homepage
-            pathType: Prefix
-            backend:
-              service:
-                name: web-apps-svc
-                port:
-                  number: 80
           - path: /
             pathType: Prefix
             backend:
@@ -25,3 +16,10 @@ spec:
                 name: web-apps-svc
                 port:
                   number: 80
+          - path: /conf
+            pathType: Prefix
+            backend:
+              service:
+                name: web-apps-svc
+                port:
+                  number: 80        
