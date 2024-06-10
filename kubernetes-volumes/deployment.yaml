@@ -55,7 +55,7 @@ spec:
           name: nginx-config
       - name: shared-data
         persistentVolumeClaim:
-          claimName: pvc200mi
+          claimName: pvc-minikube 
       - name: custom-index-html
         configMap:    
           name: custom-index-html
