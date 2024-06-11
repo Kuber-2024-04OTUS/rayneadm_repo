@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-apps-dp
+  namespace: homework
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      nodeSelector:
+        homework: "true"  
+      initContainers:
+      - name: init-container
+        image: busybox
+        command: ["sh", "-c"] 
+        args:
+        - | 
+          wget -O /init/index.html https://raw.githubusercontent.com/rayneadm/tings/main/web/index.html
+          echo "<!-- Appended by init container -->" >> /init/index.html
+          echo "Hostname: $(hostname)" >> /init/index.html
+          echo "Date: $(date)" >> /init/index.html
+          echo "Hostname: $(hostname)" >> /init/index.html
+        volumeMounts:
+        - name: shared-data
+          mountPath: /init
+      containers:
+      - name: web-server
+        image: nginx
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+          name: http-web
+        volumeMounts:
+        - name: shared-data
+          mountPath: /homework
+        - name: config-volume
+          mountPath: /etc/nginx
+        readinessProbe:
+          httpGet:
+            path: /index.html
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 3
+      volumes:
+      - name: config-volume
+        configMap:
+          name: nginx-config
+      - name: shared-data
+        emptyDir: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1      
